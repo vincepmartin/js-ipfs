@@ -201,7 +201,7 @@
     "yargs-promise": "^1.1.0"
   },
   "optionalDependencies": {
-    "prom-client": "^11.1.3",
+    "prom-client": "^11.4.0",
     "prometheus-gc-stats": "~0.6.0"
   },
   "contributors": [
