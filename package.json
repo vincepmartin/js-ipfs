@@ -126,7 +126,7 @@
     "ipfs-multipart": "~0.1.0",
     "ipfs-repo": "~0.26.6",
     "ipfs-unixfs": "~0.1.16",
-    "ipfs-unixfs-exporter": "~0.37.6",
+    "ipfs-unixfs-exporter": "~0.37.7",
     "ipfs-unixfs-importer": "~0.39.9",
     "ipfs-utils": "~0.0.3",
     "ipld": "~0.24.1",
