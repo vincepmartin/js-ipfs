@@ -14,7 +14,7 @@
     "html-webpack-plugin": "^3.2.0",
     "http-server": "~0.11.1",
     "terser-webpack-plugin": "^1.2.1",
-    "webpack": "^4.28.4"
+    "webpack": "^4.35.2"
   },
   "dependencies": {
     "videostream": "^3.2.0"
