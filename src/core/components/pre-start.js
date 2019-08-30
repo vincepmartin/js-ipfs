@@ -7,6 +7,9 @@ const waterfall = require('async/waterfall')
 const Keychain = require('libp2p-keychain')
 const mergeOptions = require('merge-options')
 const NoKeychain = require('./no-keychain')
+const KeyTransformDatastore = require('datastore-core').KeytransformDatastore
+const keychainTransformer = require('../../utils/keychain-encoder')
+
 /*
  * Load stuff from Repo into memory
  */
@@ -49,7 +52,9 @@ module.exports = function preStart (self) {
           // most likely an init or upgrade has happened
         } else if (pass) {
           const keychainOptions = Object.assign({ passPhrase: pass }, config.Keychain)
-          self._keychain = new Keychain(self._repo.keys, keychainOptions)
+          const keychainTransformedDatastore = new KeyTransformDatastore(self._repo.keys, keychainTransformer)
+          self._keychain = new Keychain(keychainTransformedDatastore, keychainOptions)
+          // self._keychain = new Keychain(self._repo.keys, keychainOptions)
           self.log('keychain constructed')
         } else {
           self._keychain = new NoKeychain()
