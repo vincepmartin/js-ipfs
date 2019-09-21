@@ -205,7 +205,7 @@
     "libp2p-websocket-star": "~0.10.2",
     "ncp": "^2.0.0",
     "p-event": "^4.1.0",
-    "qs": "^6.5.2",
+    "qs": "^6.9.0",
     "rimraf": "^3.0.0",
     "sinon": "^7.4.2",
     "stream-to-promise": "^2.2.0"
