@@ -126,7 +126,7 @@
     "kind-of": "^6.0.2",
     "ky": "~0.13.0",
     "ky-universal": "~0.3.0",
-    "libp2p": "~0.26.1",
+    "libp2p": "~0.26.2",
     "libp2p-bootstrap": "~0.9.3",
     "libp2p-crypto": "~0.16.0",
     "libp2p-delegated-content-routing": "^0.2.4",
