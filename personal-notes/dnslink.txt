@@ -1,0 +1,44 @@
+I am confused about the test.  It seems that we are running the following
+
+ipfs dns _dnslink.ipfs.io which returns the following
+
+Attempt via the ipfs go client:
+"ipfs dns _dnslink.ipfs.io" -> returns "Error: not a valid domain name"
+
+I feel like this makes some sense because _dnslink.ipfs.io doesn't even exist
+in terms of a TEXT record anyway.
+
+** BUT!!! **
+the following https://github.com/ipfs/go-ipfs/issues/6454
+
+robotburrito@vicente-1:~/Code/personal/js-ipfs$ dig +noall +answer TXT ipfs.io
+ipfs.io.		60	IN	TXT	"v=spf1 a include:_spf.google.com ~all"
+ipfs.io.		60	IN	TXT	"ALIAS for yawetag-int.ipfs.io"
+ipfs.io.		60	IN	TXT	"dnslink=/ipns/website.ipfs.io"
+
+so it looks like we have an dnslink TXT record that goes to /ipns/ instead of
+ipfs/, so maybe this should be done as a recursive thing?  I think I read a bit
+about this in another issue that is related to the go-ipfs implementation.
+
+-- Go issue -- TODO: Check into this!!!!!!!!!!!!!!!!!!
+https://github.com/ipfs/go-ipfs/issues/6454
+
+What about docs.ipfs.io?:
+"ipfs dns _dnslink.docs.ipfs.io" -> returns "Error: not a valid domain name"
+
+This makes sense, because why would we bother to even dig this?
+Let's try to just do a dig on _dnslink.docs.ipfs.io for the TXT record and
+compare it to an ipfs dns to docs.ipfs.io.
+
+"ipfs dns docs.ipfs.io" -> "/ipfs/QmNrbogjGZWgUSrbmHXydwc5b51oJQsBfHA2RkNRVf2ikc"
+- VS -
+"dig +noall +answer TXT _dnslink.docs.ipfs.io" ->
+"_dnslink.docs.ipfs.io.	26	IN	TXT	"dnslink=/ipfs/QmNrbogjGZWgUSrbmHXydwc5b51oJQsBfHA2RkNRVf2ik"
+
+This makes sense!  I think that the problem here may be the testing itself, why
+the hell are we asking "ipfs dns" to resolve _dnslink.docs.ipfs.io?  Instead
+shouldn't we instead do "ipfs dns docs.ipfs.io" which should then
+programatically check what _dnslink.docs.ipfs.io resolves to?
+
+1. Check into the code!
+
